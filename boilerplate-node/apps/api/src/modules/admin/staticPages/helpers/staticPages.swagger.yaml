@@ -1,0 +1,202 @@
+paths:
+  /static-pages:
+    get:
+      tags:
+        - Static Pages
+      summary: Get all static pages
+      description: Returns all static pages.
+      parameters:
+        - name: search
+          in: query
+          required: false
+          schema:
+            type: string
+          example: "ABOUT_US"
+        - name: perPage
+          in: query
+          required: false
+          schema:
+            type: number
+          description: Number of records per page
+          example: 10
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: number
+          description: Page number
+          example: 1
+        - name: orderBy
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Order by field
+          example: "created_at"
+        - name: orderDir
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Order direction
+          example: "asc"
+      responses:
+        "200":
+          description: A list of static pages
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                      description: The ID of the static page
+                      example: 1
+                    page:
+                      type: string
+                      description: The name of the static page
+                      example: ABOUT_US
+                    content:
+                      type: string
+                      description: The content of the static page
+                      example: This is the content of the static page about us
+        "500":
+          description: Internal server error fetching static pages
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Failed to fetch static pages
+    put:
+      tags:
+        - Static Pages
+      summary: Update a static page by name
+      description: Updates a static page with a content by its name.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: number
+                  example: 1
+                page:
+                  type: string
+                  example: ABOUT_US
+                content:
+                  type: string
+                  example: This is the content of the static page about us
+      responses:
+        "200":
+          description: Static page updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  page:
+                    type: string
+                  content:
+                    type: string
+        "201":
+          description: Static page created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  page:
+                    type: string
+                  content:
+                    type: string
+        "500":
+          description: Internal server error updating static page
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+
+  /static-pages/{page}:
+    get:
+      tags:
+        - Static Pages
+      summary: Get content for a static page
+      description: Returns content for a specific static page by its name.
+      parameters:
+        - name: page
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Name of the static page to retrieve
+          example: ABOUT_US
+      responses:
+        "200":
+          description: A single static page
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  page:
+                    type: string
+                    description: Name of the static page
+                    example: ABOUT_US
+                  content:
+                    type: string
+                    description: Content of the static page
+                    example: This is the content of the static page about us
+        "500":
+          description: Internal server error fetching static page
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Failed to fetch static page
+    delete:
+      tags:
+        - Static Pages
+      summary: Delete a static page by name
+      description: Deletes a static page by its name.
+      parameters:
+        - name: page
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Name of the static page to delete
+          example: ABOUT_US
+      responses:
+        "200":
+          description: Static page deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: FAQ deleted successfully
+        "500":
+          description: Internal server error deleting FAQ
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Failed to delete FAQ

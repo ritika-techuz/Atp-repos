@@ -1,0 +1,34 @@
+{
+  "extends": [
+    "//"
+  ],
+  "tasks": {
+    "build": {
+      "outputs": [
+        "dist/**"
+      ]
+    },
+    "dev": {
+      "with": [
+        "@repo/logger#dev",
+        "@repo/config#dev",
+        "@repo/i18n#dev",
+        "@repo/utils#dev",
+        "@repo/tokens#dev",
+        "@repo/validator#dev",
+        "@repo/storage-service#dev",
+        "@repo/mailer#dev",
+        "@repo/stripe#dev",
+        "@repo/response-handler#dev",
+        "@repo/db#dev",
+        "@repo/chat#dev",
+        "@repo/socket#dev",
+        "@repo/notifications#dev",
+        "@repo/firebase-auth#dev",
+        "@repo/sms-service#dev",
+        "@repo/redis#dev",
+        "@repo/file-service#dev"
+      ]
+    }
+  }
+}

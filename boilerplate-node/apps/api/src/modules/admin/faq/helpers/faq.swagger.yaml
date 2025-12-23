@@ -1,0 +1,237 @@
+paths:
+  /faq:
+    get:
+      tags:
+        - FAQ
+      summary: Get a list of FAQs
+      description: Returns a list of available FAQs with optional search by question or answer.
+      parameters:
+        - name: search
+          in: query
+          required: false
+          schema:
+            type: string
+          example: "Paris"
+        - name: status
+          in: query
+          required: false
+          schema:
+            type: number
+          example: 1
+        - name: perPage
+          in: query
+          required: false
+          schema:
+            type: number
+          description: Number of records per page
+          example: 10
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: number
+          description: Page number
+          example: 1
+        - name: orderBy
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Order by field
+          example: "created_at"
+        - name: orderDir
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Order direction
+          example: "asc"
+      responses:
+        "200":
+          description: A list of FAQs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                      description: FAQ ID
+                      example: 1
+                    question:
+                      type: string
+                      description: Question
+                      example: What is the capital of France?
+                    answer:
+                      type: string
+                      description: Answer
+                      example: Paris
+        "500":
+          description: Internal server error fetching FAQs
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Failed to fetch FAQ list
+    post:
+      tags:
+        - FAQ
+      summary: Create a new FAQ
+      description: Creates a new FAQ with a question and answer.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                question:
+                  type: string
+                  example: What is the capital of France?
+                answer:
+                  type: string
+                  example: Paris
+      responses:
+        "201":
+          description: FAQ created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  statusCode:
+                    type: number
+                    example: 201
+                  message:
+                    type: string
+                    example: FAQ created successfully
+                  result:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                        example: 1
+        "400":
+          description: Validation error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Validation error
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Unauthorized
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  statusCode:
+                    type: number
+                    example: 500
+                  message:
+                    type: string
+                    example: Failed to create FAQ
+    put:
+      tags:
+        - FAQ
+      summary: Update a FAQ by ID
+      description: Updates a FAQ with a question and answer by its ID.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: number
+                  example: 1
+                question:
+                  type: string
+                  example: What is the capital of France?
+                answer:
+                  type: string
+                  example: Paris
+      responses:
+        "200":
+          description: FAQ updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: number
+                  question:
+                    type: string
+                  answer:
+                    type: string
+        "500":
+          description: Internal server error updating FAQ
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+
+  /faq/{id}:
+    delete:
+      tags:
+        - FAQ
+      summary: Delete a FAQ by ID
+      description: Deletes a FAQ by its ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: number
+          description: ID of the FAQ to delete
+          example: 1
+      responses:
+        "200":
+          description: FAQ deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: FAQ deleted successfully
+        "500":
+          description: Internal server error deleting FAQ
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Failed to delete FAQ

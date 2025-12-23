@@ -1,0 +1,82 @@
+paths:
+  /faq:
+    get:
+      tags:
+        - FAQ
+      summary: Get a list of FAQs
+      description: Returns a list of available FAQs with optional search by question or answer.
+      parameters:
+        - name: search
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Search term to filter FAQs by question or answer
+          example: "United"
+        - name: status
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Status of the FAQ
+          example: 1
+        - name: perPage
+          in: query
+          required: false
+          schema:
+            type: number
+          description: Number of records per page
+          example: 10
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: number
+          description: Page number
+          example: 1
+        - name: orderBy
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Order by field
+          example: "created_at"
+        - name: orderDir
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Order direction
+          example: "asc"
+      responses:
+        "200":
+          description: A list of FAQs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                      description: FAQ ID
+                      example: 1
+                    question:
+                      type: string
+                      description: Question
+                      example: What is the capital of France?
+                    answer:
+                      type: string
+                      description: Answer
+                      example: Paris
+        "500":
+          description: Internal server error fetching FAQs
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Failed to fetch FAQ list

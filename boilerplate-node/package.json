@@ -1,0 +1,41 @@
+{
+  "name": "repo",
+  "private": true,
+  "scripts": {
+    "clean": "turbo run clean && rimraf .turbo",
+    "build": "turbo run build --concurrency=20",
+    "dev": "pnpm build && turbo run dev --filter=api --concurrency=20",
+    "start": "pnpm build && turbo run start --filter=api --concurrency=20",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "lint": "turbo run lint",
+    "test": "pnpm build && turbo run test",
+    "check-types": "turbo run check-types",
+    "make-migration": "turbo run --filter=@repo/db make-migration -- --",
+    "migrate": "turbo run --filter=@repo/db migrate",
+    "make-seed": "turbo run --filter=@repo/db make-seed -- --",
+    "run-seed": "turbo run --filter=@repo/db run-seed",
+    "run-specific-seed": "turbo run --filter=@repo/db run-specific-seed --",
+    "rollback": "turbo run --filter=@repo/db rollback",
+    "clear-db": "turbo run --filter=@repo/db clear-db",
+    "generate-keys": "turbo run --filter @repo/tokens generate-keys",
+    "generate-graph": "turbo run build test --graph > ./graphs/graph.dot && dot -T png ./graphs/graph.dot -o ./graphs/graph.png",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@jest/globals": "^29.7.0",
+    "@types/node": "^22.15.18",
+    "dotenv-cli": "^8.0.0",
+    "eslint": "^9.27.0",
+    "husky": "^9.1.7",
+    "jest": "^29.7.0",
+    "prettier": "^3.5.3",
+    "rimraf": "^6.0.1",
+    "tsup": "^8.5.0",
+    "turbo": "^2.5.4",
+    "typescript": "^5.8.3"
+  },
+  "packageManager": "pnpm@10.11.1",
+  "engines": {
+    "node": ">=22"
+  }
+}

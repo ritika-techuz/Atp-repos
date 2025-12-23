@@ -1,0 +1,124 @@
+paths:
+  /activity:
+    get:
+      tags:
+        - Activity
+      summary: Get a list of activity logs
+      description: Returns a list of activity logs
+      parameters:
+        - name: Accept-Language
+          in: header
+          required: true
+          schema:
+            type: string
+            enum: [en, fr]
+            default: en
+          description: Language code for localized responses (default is en)
+        - name: user_id
+          in: query
+          required: false
+          schema:
+            type: number
+          description: User ID to filter logs by
+        - name: search
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Search term to filter users by name
+        - name: from_date
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date
+          description: Start date to filter logs from
+        - name: to_date
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date
+          description: End date to filter logs to
+        - name: perPage
+          in: query
+          required: false
+          schema:
+            type: number
+          description: Number of records per page
+          example: 10
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: number
+          description: Page number
+          example: 1
+        - name: orderBy
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Order by field
+          example: "created_at"
+        - name: orderDir
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [asc, desc]
+          description: Order direction (asc or desc)
+          example: "asc"
+      responses:
+        '200':
+          description: A list of filtered activity logs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                      description: Activity Log ID
+                      example: 1
+                    user_id:
+                      type: number
+                      description: ID of the user associated with the activity
+                      example: 123
+                    activity_id:
+                      type: number
+                      description: ID of the activity performed
+                      example: 456
+                    ip_address:
+                      type: string
+                      description: IP address from which the activity was performed
+                      example: "192.168.1.1"
+                    device_type:
+                      type: number
+                      description: Type of device used for the activity
+                      example: 2
+                      enum: [1, 2, 3]
+                      enumNames: [Desktop, Mobile, Tablet]
+                    activity_type:
+                      type: number
+                      description: Type of activity performed
+                      example: 1
+                      enum: [1, 2]
+                      enumNames: [Login, Logout]
+                    created_at:
+                      type: string
+                      format: date-time
+                      description: Timestamp when the activity was logged
+                      example: "2023-10-01T12:00:00Z"
+        '500':
+          description: Internal server error fetching states
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Failed to fetch activity logs list

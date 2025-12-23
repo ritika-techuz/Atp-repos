@@ -1,0 +1,40 @@
+{
+  "name": "@repo/redis",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.mjs"
+    }
+  },
+  "scripts": {
+    "clean": "rimraf dist && rimraf .turbo",
+    "prebuild": "rimraf dist",
+    "build": "dotenv -e ../../.env -- tsup",
+    "dev": "dotenv -e ../../.env -- tsup --watch",
+    "lint": "eslint src/",
+    "check-types": "tsc --noEmit",
+    "test": "NODE_OPTIONS='--experimental-vm-modules --no-warnings' dotenv -e ../../.env -- jest"
+  },
+  "jest": {
+    "preset": "@repo/jest-presets/node"
+  },
+  "dependencies": {
+    "@repo/config": "workspace:*",
+    "@repo/logger": "workspace:*",
+    "redis": "5.1.0"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@repo/jest-presets": "workspace:*",
+    "@repo/typescript-config": "workspace:*"
+  }
+}

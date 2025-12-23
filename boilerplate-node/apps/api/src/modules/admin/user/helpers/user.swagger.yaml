@@ -1,0 +1,351 @@
+  paths:
+    /user:
+      post:
+        tags:
+          - User Management
+        summary: Create a new user
+        description: Creates a new user with first name , last name , profile photo , email and mobile number
+        parameters:
+          - name: Accept-Language
+            in: header
+            required: true
+            schema:
+              type: string
+              enum: [en, fr]
+              default: en
+            description: Language code for localized responses (default is en)
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  first_name:
+                    type: string
+                    example: John
+                  last_name:
+                    type: string
+                    example: Doe
+                  email:
+                    type: string
+                    example: user@gmail.com
+                  status:
+                    type: number
+                    enum: [1, 2]
+                    description: Status of the user (1 for active, 2 for inactive)
+                  role:
+                    type: number
+                    enum: [1, 2]
+                    description: Role of the user (1 for admin, 2 for user)
+        responses:
+          '200':
+            description: Successfully created user.
+          '500':
+            description: Internal server error.
+      get:
+        summary: Get all users
+        description: Retrieve a list of users based on filters like `id` and `status`.
+        tags:
+          - User Management
+        parameters:
+          - name: Accept-Language
+            in: header
+            required: true
+            schema:
+              type: string
+              enum: [en, fr]
+              default: en
+            description: Language code for localized responses (default is en)
+          - in: query
+            name: status
+            required: false
+            schema:
+              type: number
+              enum: [1,2]
+            description: Filter users by status (e.g., 1 for active , 2 for inactive)
+          - name: search
+            in: query
+            required: false
+            schema:
+              type: string
+            description: Only first_name , last_name , email and mobile number are searchable
+            example: "Paris"
+          - name: perPage
+            in: query
+            required: false
+            schema:
+              type: number
+            description: Number of records per page
+            example: 10
+          - name: page
+            in: query
+            required: false
+            schema:
+              type: number
+            description: Page number
+            example: 1
+          - name: orderBy
+            in: query
+            required: false
+            schema:
+              type: string
+              enum: [first_name,last_name,created_at,updated_at,deleted_at,email,status]
+            description: Order by field
+            example: "created_at"
+          - name: orderDir
+            in: query
+            required: false
+            schema:
+              type: string
+              enum: [asc, desc]
+            description: Order direction
+            example: "asc"
+        responses:
+          '200':
+            description: Successfully retrieved users.
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                        description: user ID.
+                      first_name:
+                        type: number
+                        description: first name of user.
+                      last_name:
+                        type: number
+                        description: last name of user.
+                      profile_url:
+                        type: string
+                        description: profile url of user.
+                      email:
+                        type: string
+                        description: email of user.
+                      mobile_number:
+                        type: string
+                        description: Phone Number of user.
+                      role:
+                        type: number
+                      status:
+                        type: number
+                        description: Type of status e.g active and inactive
+          '404':
+            description: No users found.
+          '500':
+            description: Internal server error.
+      patch:
+        tags:
+          - User Management
+        summary: Update a User by ID
+        description: Updates a user with first name , last name , profile photo by its id
+        parameters:
+          - name: Accept-Language
+            in: header
+            required: true
+            schema:
+              type: string
+              enum: [en, fr]
+              default: en
+            description: Language code for localized responses (default is en)
+        requestBody:
+          required: true
+          content:
+            multipart/form-data:
+                schema:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                      example: 1
+                    first_name:
+                      type: string
+                      example: John
+                    last_name:
+                      type: string
+                      example: Doe
+                    profile_url:
+                      type: string
+                      format: binary
+                      example: https://www.xyz.com/profilePicId
+        responses:
+          "200":
+            description: User updated successfully
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                    question:
+                      type: string
+                    answer:
+                      type: string
+          "500":
+            description: Internal server error updating User
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    error:
+                      type: string
+    /user/{id}:
+      get:
+        tags:
+        - User Management
+        summary: Get a single user by ID
+        description: Returns details of a specific user by its ID.
+        security: []
+        parameters:
+          - name: Accept-Language
+            in: header
+            required: true
+            schema:
+              type: string
+              enum: [en, fr]
+              default: en
+            description: Language code for localized responses (default is en)
+          - name: id
+            in: path
+            required: true
+            schema:
+              type: number
+            description: ID of the user to retrieve
+            example: 1
+        responses:
+          '200':
+            description: A single user
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                      description: Country ID
+                      example: 1
+                    first_name:
+                      type: string
+                      description: first name of user
+                      example: John Doe
+                    last_name:
+                      type: string
+                      description: last name of user
+                      example: John Doe
+                    profile_url:
+                      type: string
+                      description: profile url of user.
+                    email:
+                      type: string
+                      description: email of user
+                      example: John Doe
+                    mobile_number:
+                      type: string
+                      description: mobile_number of user
+                      example: 9714253343
+                    status:
+                      type: number
+                      description: status of user
+                      example: Active , Inactive
+                    role:
+                      type: number
+                      description: role of user
+                      example: Admin , User
+          '500':
+            description: Internal server error fetching user
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    error:
+                      type: string
+                      example: Failed to fetch user
+      delete:
+        tags:
+          - User Management
+        summary: Delete user
+        description: Delete a user based `id` of user
+        parameters:
+                - name: Accept-Language
+                  in: header
+                  required: true
+                  schema:
+                    type: string
+                    enum: [en, fr]
+                    default: en
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: number
+                  description: ID of the user to delete
+                  example: 1
+        responses:
+          "200":
+            description: User deleted successfully
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: User deleted successfully
+          "500":
+            description: Internal server error deleting User
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    error:
+                      type: string
+                      example: Failed to delete User
+      patch:
+        tags:
+          - User Management
+        summary: Update user status
+        description: Update user status based on `user_id`
+        parameters:
+                - name: Accept-Language
+                  in: header
+                  required: true
+                  schema:
+                    type: string
+                    enum: [en, fr]
+                    default: en
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: number
+                  description: ID of the user to update status
+                  example: 1
+        responses:
+          "200":
+            description: User status updated successfully
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: User status updated successfully
+          "500":
+            description: Internal server error deleting User
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    error:
+                      type: string
+                      example: Failed to update user status

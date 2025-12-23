@@ -1,0 +1,145 @@
+paths:
+  /notifications:
+    get:
+      tags:
+        - Notifications
+      summary: Get user notifications
+      description: Retrieve a list of notifications for the authenticated user
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 1
+          description: Page number for pagination
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 10
+          description: Number of items per page
+        - name: status
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [read, unread, all]
+            default: all
+          description: Filter notifications by read status
+      responses:
+        '200':
+          description: List of notifications retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          format: uuid
+                          example: "123e4567-e89b-12d3-a456-426614174000"
+                        title:
+                          type: string
+                          example: "New Message"
+                        message:
+                          type: string
+                          example: "You have received a new message"
+                        type:
+                          type: string
+                          enum: [info, warning, success, error]
+                          example: "info"
+                        status:
+                          type: string
+                          enum: [read, unread]
+                          example: "unread"
+                        createdAt:
+                          type: string
+                          format: date-time
+                          example: "2024-03-20T10:00:00Z"
+                  meta:
+                    type: object
+                    properties:
+                      total:
+                        type: integer
+                        example: 50
+                      page:
+                        type: integer
+                        example: 1
+                      limit:
+                        type: integer
+                        example: 10
+        '401':
+          description: Unauthorized - User not authenticated
+        '500':
+          description: Internal server error
+
+  /notifications/mark-as-read:
+    put:
+      tags:
+        - Notifications
+      summary: Mark all notifications as read
+      description: Update the status of all unread notifications to read
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: All notifications marked as read successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: "All notifications marked as read"
+                  count:
+                    type: integer
+                    example: 5
+        '401':
+          description: Unauthorized - User not authenticated
+        '500':
+          description: Internal server error
+
+  /notifications/count:
+    get:
+      tags:
+        - Notifications
+      summary: Get unread notification count  
+      description: Retrieve the count of unread notifications for the authenticated user
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Unread notification count retrieved successfully 
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 5
+        '401':
+          description: Unauthorized - User not authenticated
+        '500':
+          description: Internal server error
+
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

@@ -1,0 +1,88 @@
+paths:
+  /feedback:
+    post:
+      tags:
+        - Feedback
+      summary: Post user feedback
+      description: Returns the feedback data that saved.
+      parameters:
+        - name: Accept-Language
+          in: header
+          required: true
+          schema:
+            type: string
+            enum: [en, fr]
+            default: en
+          description: Language code for localized responses (default is en)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: number
+                  example: 1
+                  description: |
+                  Type of feedback:
+                    - 1 = System
+                    - 2 = Module
+                feedback:
+                  type: string
+                  example: module is perfectly working
+                module_id:
+                  type: number
+                  example: 1
+                rating:
+                  type: number
+                  example: 4
+              required:
+                - user_id
+                - type
+              if:
+                properties:
+                  type:
+                    const: 2
+              then:
+                required:
+                  - module_id
+                  - feedback
+      responses:
+        "200":
+          description: Successfully created user feedback
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: number
+                    example: 1
+                  user_id:
+                    type: number
+                    example: 103
+                  feedback:
+                    type: string
+                    example: This is a feedback message.
+                  module_id:
+                    type: number
+                    example: 1
+                  type:
+                    type: number
+                    example: 1
+                  rating:
+                    type: number
+                    example: 5
+        "400":
+          description: Bad Request - validation errors
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - type: object
+                    properties:
+                      error:
+                        type: string
+                        example: Validation Error
+                  

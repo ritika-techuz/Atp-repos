@@ -1,0 +1,62 @@
+  paths:
+    /feedback:
+      get:
+        summary: Get all feedbacks
+        description: Retrieve a list of feedbacks based on filters like `user_id` and `status`.
+        tags:
+          - Feedback
+        parameters:
+          - name: Accept-Language
+            in: header
+            required: true
+            schema:
+              type: string
+              enum: [en, fr]
+              default: en
+            description: Language code for localized responses (default is en)
+          - in: query
+            name: user_id
+            required: false
+            schema:
+          - in: query
+            name: status
+            required: false
+            schema:
+              type: number
+              enum: [1,2]
+            description: Filter feedbacks by status (e.g., 1 for active , 2 for inactive)
+        responses:
+          '200':
+            description: Successfully retrieved feedbacks.
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                        description: Feedback ID.
+                      user_id:
+                        type: number
+                        description: ID of the user who submitted the feedback.
+                      module_id:
+                        type: number
+                        description: ID of the module related to the feedback.
+                      rating:
+                        type: number
+                        description: Rating given in the feedback.
+                      feedback:
+                        type: string
+                        description: Feedback text.
+                      type:
+                        type: number
+                        description: Type of feedback.
+                      status:
+                        type: number
+                        description: Type of status e.g active and inactive
+          '404':
+            description: No feedbacks found.
+          '500':
+            description: Internal server error.

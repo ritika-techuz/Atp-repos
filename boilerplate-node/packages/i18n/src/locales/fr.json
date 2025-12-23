@@ -1,0 +1,124 @@
+{
+    "server": {
+        "error": "Erreur interne du serveur",
+        "ssl_certificates_not_found": "Certificats SSL non trouvés"
+    },
+    "common": {
+        "success": "Succès",
+        "error": "Erreur",
+        "validation_error": "Erreur de validation",
+        "not_authenticated": "Non authentifié",
+        "session_expired": "Session expirée",
+        "unsupported_file_type": "Type de fichier non supporté",
+        "not_found": "Ligne non trouvée",
+        "fetch_success": "Ligne récupérée avec succès",
+        "list_success": "Liste récupérée avec succès",
+        "create_success": "Ligne créée avec succès",
+        "update_success": "Ligne mise à jour avec succès",
+        "update_failed": "Échec de la mise à jour des données",
+        "delete_success": "Ligne supprimée avec succès"
+    },
+    "user": {
+        "fetch_success": "Utilisateur récupéré avec succès",
+        "not_found": "Utilisateur non trouvé",
+        "already_exists": "Utilisateur existe déjà",
+        "not_active": "Utilisateur n'est pas actif",
+        "signup_success": "Inscription réussie",
+        "account_deleted": "Votre compte a été supprimé. Veuillez contacter le support.",
+        "list_success": "Liste récupérée avec succès",
+        "update_success": "Ligne mise à jour avec succès",
+        "update_failed": "Échec de la mise à jour des données",
+        "create_success": "Utilisateur créé avec succès"
+    },
+    "auth": {
+        "login_success": "Connexion réussie",
+        "invalid_credentials": "Informations d'identification invalides",
+        "unauthorized": "Non autorisé"
+    },
+    "profile": {
+        "fetch_success": "Profil récupéré avec succès",
+        "update_success": "Profil mis à jour avec succès"
+    },
+    "password": {
+        "invalid_password": "Mot de passe invalide",
+        "password_change_success": "Mot de passe modifié avec succès",
+        "password_cannot_be_same_as_current": "Le mot de passe ne peut pas être le même que le mot de passe actuel",
+        "invalid_forget_password_link": "Lien de réinitialisation de mot de passe invalide",
+        "invalid_reset_password_link": "Lien de réinitialisation de mot de passe invalide",
+        "forget_password_link_expired": "Lien de réinitialisation de mot de passe expiré",
+        "link_verification_success": "Vérification du lien réussie",
+        "forgot_password_success": "Mot de passe oublié avec succès",
+        "reset_password_success": "Mot de passe réinitialisé avec succès"
+    },
+    "country": {
+        "fetch_success": "Pays récupéré avec succès",
+        "not_found": "Pays non trouvé",
+        "list_success": "Liste des pays récupérée avec succès"
+    },
+    "state": {
+        "fetch_success": "État récupéré avec succès",
+        "not_found": "État non trouvé",
+        "list_success": "Liste des états récupérée avec succès"
+    },
+    "notification": {
+        "fetch_success": "Notification récupérée avec succès",
+        "not_found": "Notification non trouvée",
+        "list_success": "Liste des notifications récupérée avec succès",
+        "notification_handler_not_initialized": "Notification handler non initialisé"
+    },
+    "socket": {
+        "socket_not_initialized": "Socket non initialisé"
+    },
+    "feedback": {
+        "fetch_success": "commentaires récupérés avec succès",
+        "save_success": "commentaires enregistrés avec succès",
+        "save_failed": "Échec de l'enregistrement du commentaire",
+        "not_found": "commentaire introuvable",
+        "list_success": "Liste de commentaires récupérée avec succès"
+    },
+    "referral": {
+        "list_success": "Liste des références récupérée avec succès"
+    },
+    "bookmark": {
+        "fetch_success": "Bookmark récupéré avec succès",
+        "not_found": "Bookmark non trouvé",
+        "list_success": "Liste des bookmarks récupérée avec succès",
+        "already_exists": "Bookmark existe déjà"
+    },
+    "plan": {
+        "fetch_success": "Plan récupéré avec succès",
+        "not_found": "Plan non trouvé",
+        "list_success": "Liste des plans récupérée avec succès",
+        "create_success": "Plan créé avec succès",
+        "create_failed": "Échec de la création du plan",
+        "update_success": "Plan mis à jour avec succès",
+        "update_failed": "Échec de la mise à jour du plan"
+    },
+    "promo_code": {
+        "fetch_success": "Code promo récupéré avec succès",
+        "not_found": "Code promo non trouvé",
+        "list_success": "Liste des codes promo récupérée avec succès",
+        "create_success": "Code promo créé avec succès",
+        "create_failed": "Échec de la création du code promo",
+        "update_success": "Code promo mis à jour avec succès",
+        "delete_success": "Code promo supprimé avec succès",
+        "invalid_code": "Code promo invalide",
+        "validate_success": "Code promo est valide"
+    },
+    "subscription": {
+        "fetch_success": "Abonnement récupéré avec succès",
+        "not_found": "Abonnement non trouvé",
+        "list_success": "Liste des abonnements récupérée avec succès",
+        "price_exceeded": "Le montant de la réduction du code promo est supérieur au prix du plan",
+        "cancel_success": "Abonnement annulé avec succès",
+        "purchase_success": "Abonnement acheté avec succès",
+        "upgrade_success": "Abonnement mis à niveau avec succès"
+    },
+    "static_pages": {
+        "fetch_success": "Page statique récupérée avec succès",
+        "not_found": "Page statique non trouvée",
+        "list_success": "Liste des pages statiques récupérée avec succès",
+        "update_success": "Page statique mise à jour avec succès",
+        "delete_success": "Page statique supprimée avec succès"
+    }
+}

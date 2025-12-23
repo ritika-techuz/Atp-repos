@@ -1,0 +1,41 @@
+paths:
+  /static-pages/{page}:
+    get:
+      tags:
+        - Static Pages
+      summary: Get content for a static page
+      description: Returns content for a specific static page by its name.
+      parameters:
+        - name: page
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Name of the static page to retrieve
+          example: ABOUT_US
+      responses:
+        "200":
+          description: A single static page
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  page:
+                    type: string
+                    description: Name of the static page
+                    example: ABOUT_US
+                  content:
+                    type: string
+                    description: Content of the static page
+                    example: This is the content of the static page about us
+        "500":
+          description: Internal server error fetching static page
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Failed to fetch static page

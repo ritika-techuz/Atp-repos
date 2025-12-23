@@ -1,0 +1,119 @@
+paths:
+  /bookmark:
+    post:
+      tags:
+        - Bookmark
+      summary: Add or update a bookmark
+      description: Returns the bookmark data that was added or updated.
+      parameters:
+        - name: Accept-Language
+          in: header
+          required: true
+          schema:
+            type: string
+            enum: [en, fr]
+            default: en
+          description: Language code for localized responses (default is en)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                target_id:
+                  type: number
+                  example: 1
+                target_type:
+                  type: string
+                  enum: [user, blog, project, property]
+                  example: user
+              required:
+                - target_id
+                - target_type
+      responses:
+        "200":
+          description: Successfully added or updated bookmark
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: number
+                    example: 1
+                  user_id:
+                    type: number
+                    example: 103
+                  target_id:
+                    type: number
+                    example: 1
+                  target_type:
+                    type: string
+                    example: user
+        "400":
+          description: Bad Request - validation errors
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - type: object
+                    properties:
+                      error:
+                        type: string
+                        example: Validation Error
+                        
+    get:
+      tags:
+        - Bookmark
+      summary: List bookmarks for a user
+      description: Returns a list of bookmarks for the user.
+      parameters:
+        - name: Accept-Language
+          in: header
+          required: true
+          schema:
+            type: string
+            enum: [en, fr]
+            default: en
+          description: Language code for localized responses (default is en)
+        - name: target_type
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [user, blog, project, property]
+          description: Filter bookmarks by target type
+      responses:
+        "200":
+          description: Successfully retrieved bookmarks
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                      example: 1
+                    user_id:
+                      type: number
+                      example: 103
+                    target_id:
+                      type: number
+                      example: 1
+                    target_type:
+                      type: string
+                      example: user
+        "400":
+          description: Bad Request - validation errors
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - type: object
+                    properties:
+                      error:
+                        type: string
+                        example: Validation Error 

@@ -1,0 +1,124 @@
+{
+    "common": {
+        "success": "Success",
+        "error": "Error",
+        "validation_error": "Validation error",
+        "not_authenticated": "Not authenticated",
+        "session_expired": "Session expired",
+        "unsupported_file_type": "Unsupported file type",
+        "not_found": "Row not found",
+        "fetch_success": "Row fetched successfully",
+        "list_success": "List fetched successfully",
+        "create_success": "Row created successfully",
+        "update_success": "Row updated successfully",
+        "delete_success": "Row deleted successfully"
+    },
+    "user": {
+        "fetch_success": "User fetched successfully",
+        "not_found": "User not found",
+        "already_exists": "User already exists",
+        "not_active": "User is not active",
+        "signup_success": "Signup successfully",
+        "account_deleted": "Your account has been deleted. Please contact support.",
+        "list_success": "List fetched successfully",
+        "update_success": "Row updated successfully",
+        "update_failed": "Failed to update data",
+        "create_success": "User has been created successfully"
+    },
+    "auth": {
+        "login_success": "Login successful",
+        "invalid_credentials": "Invalid credentials",
+        "unauthorized": "Unauthorized",
+        "access_denied": "Access denied"
+    },
+    "profile": {
+        "fetch_success": "Profile fetched successfully",
+        "update_success": "Profile updated successfully"
+    },
+    "password": {
+        "invalid_password": "Invalid password",
+        "password_change_success": "Password changed successfully",
+        "password_cannot_be_same_as_current": "Password cannot be the same as the current password",
+        "invalid_forget_password_link": "Invalid forget password link",
+        "invalid_reset_password_link": "Invalid reset password link",
+        "forget_password_link_expired": "Forget password link expired",
+        "link_verification_success": "Link verification successful",
+        "forgot_password_success": "Forgot password successfully",
+        "reset_password_success": "Password reset successfully"
+    },
+    "country": {
+        "fetch_success": "Country fetched successfully",
+        "not_found": "Country not found",
+        "list_success": "Country list fetched successfully"
+    },
+    "state": {
+        "fetch_success": "State fetched successfully",
+        "not_found": "State not found",
+        "list_success": "State list fetched successfully"
+    },
+    "server": {
+        "error": "Internal server error",
+        "ssl_certificates_not_found": "SSL certificates not found"
+    },
+    "notification": {
+        "fetch_success": "Notification fetched successfully",
+        "not_found": "Notification not found",
+        "list_success": "Notification list fetched successfully",
+        "notification_handler_not_initialized": "Notification handler not initialized"
+    },
+    "socket": {
+        "socket_not_initialized": "Socket not initialized"
+    },
+    "feedback": {
+        "fetch_success": "feedback fetched successfully",
+        "save_success": "Feedback saved successfully",
+        "save_failed": "Feedback save failed",
+        "not_found": "feedback not found",
+        "list_success": "Feedback list fetched successfully"
+    },
+    "referral": {
+        "list_success": "Referral list fetched successfully"
+    },
+    "bookmark": {
+        "fetch_success": "Bookmark fetched successfully",
+        "not_found": "Bookmark not found",
+        "list_success": "Bookmark list fetched successfully",
+        "already_exists": "Bookmark already exists"
+    },
+    "plan": {
+        "fetch_success": "Plan fetched successfully",
+        "not_found": "Plan not found",
+        "list_success": "Plan list fetched successfully",
+        "create_success": "Plan created successfully",
+        "create_failed": "Failed to create plan",
+        "update_success": "Plan updated successfully",
+        "update_failed": "Failed to update plan"
+    },
+    "promo_code": {
+        "fetch_success": "Promo code fetched successfully",
+        "not_found": "Promo code not found",
+        "list_success": "Promo code list fetched successfully",
+        "create_success": "Promo code created successfully",
+        "create_failed": "Failed to create promo code",
+        "update_success": "Promo code updated successfully",
+        "delete_success": "Promo code deleted successfully",
+        "invalid_code": "Invalid promo code",
+        "validate_success": "Promo code is valid"
+    },
+    "subscription": {
+        "fetch_success": "Subscription fetched successfully",
+        "not_found": "Subscription not found",
+        "list_success": "list fetched successfully",
+        "price_exceeded": "Promo code discount amount is greater than plan price",
+        "cancel_success": "Subscription cancelled successfully",
+        "purchase_success": "Subscription purchased successfully",
+        "upgrade_success": "Subscription upgraded successfully"
+    },
+    "static_pages": {
+        "fetch_success": "Static page fetched successfully",
+        "not_found": "Static page not found",
+        "list_success": "Static page list fetched successfully",
+        "update_success": "Static page updated successfully",
+        "delete_success": "Static page deleted successfully"
+    }
+}

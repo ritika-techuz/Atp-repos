@@ -1,0 +1,439 @@
+paths:
+  /promo-code/{id}:
+    get:
+      tags:
+        - Promo Code
+      summary: Get Promo Code
+      description: Get Promo Code.
+      parameters:
+        - name: Accept-Language
+          in: header
+          required: true
+          schema:
+            type: string
+            enum: [en, fr]
+            default: en
+          description: Language code for localized responses (default is en)
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: number
+          description: Promo Code ID
+      responses:
+        "200":
+          description: Promo Code retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: number
+                    example: 1
+        "401":
+          description: Unauthorized - Invalid or missing token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Unauthorized
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Internal Server Error
+
+    put:
+      tags:
+        - Promo Code
+      summary: Update Promo Code
+      description: Update Promo Code.
+      parameters:
+        - name: Accept-Language
+          in: header
+          required: true
+          schema:
+            type: string
+            enum: [en, fr]
+            default: en
+          description: Language code for localized responses (default is en)
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: number
+          description: Promo Code ID
+      requestBody:
+        description: Promo Code details
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                promo_code:
+                  type: string
+                  example: "PROMO123"
+                discount_value:
+                  type: number
+                  example: 10
+                start_date:
+                  type: string
+                  example: "2021-01-01 00:00:00"
+                expiry_date:
+                  type: string
+                  example: "2021-12-31 23:59:59"
+                type:
+                  type: number
+                  enum: [1, 2]
+                  enumName: ["Fixed", "Percentage"]
+                  example: 2
+                status:
+                  type: number
+                  enum: [1, 2]
+                  enumName: ["Active", "Inactive"]
+                  example: 1
+      responses:
+        "200":
+          description: Promo code updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: number
+                    example: 1
+        "401":
+          description: Unauthorized - Invalid or missing token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Unauthorized
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Internal Server Error
+
+    delete:
+      tags:
+        - Promo Code
+      summary: Delete Promo Code
+      description: Delete a promo code by ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: number
+          description: Promo Code ID
+      responses:
+        "200":
+          description: Promo code deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Promo code deleted successfully
+        "401":
+          description: Unauthorized - Invalid or missing token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Unauthorized
+        "404":
+          description: Promo Code not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Promo Code not found
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Internal Server Error
+
+  /promo-code:
+    get:
+      tags:
+        - Promo Code
+      summary: List Promo Codes
+      description: List Promo Codes.
+      parameters:
+        - name: Accept-Language
+          in: header
+          required: true
+          schema:
+            type: string
+            enum: [en, fr]
+            default: en
+          description: Language code for localized responses (default is en)
+        - name: search
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Search promo code
+        - name: perPage
+          in: query
+          required: false
+          schema:
+            type: number
+          description: Number of records per page
+          example: 10
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: number
+          description: Page number
+          example: 1
+        - name: orderBy
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Order by field
+          example: "created_at"
+        - name: orderDir
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [asc, desc]
+          description: Order direction (asc or desc)
+          example: "asc"
+      responses:
+        "200":
+          description: Promo codes listed successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                          example: 1
+                        promo_code:
+                          type: string
+                          example: "PROMO123"
+                        discount_value:
+                          type: number
+                          example: 10
+                        start_date:
+                          type: string
+                          example: "2021-01-01"
+                        expiry_date:
+                          type: string
+                          example: "2021-12-31"
+                        type:
+                          type: number
+                          example: 1
+                        status:
+                          type: number
+                          example: 1
+                        created_at:
+                          type: string
+                          example: "2021-01-01 00:00:00"
+                        updated_at:
+                          type: string
+                          example: "2021-01-01 00:00:00"
+                  meta:
+                    type: object
+                    properties:
+                      total:
+                        type: number
+                        example: 20
+                      limit:
+                        type: number
+                        example: 10
+                      offset:
+                        type: number
+                        example: 0
+        "401":
+          description: Unauthorized - Invalid or missing token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Unauthorized
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Internal Server Error
+
+    post:
+      tags:
+        - Promo Code
+      summary: Create Promo Code
+      description: Create Promo Code.
+      parameters:
+        - name: Accept-Language
+          in: header
+          required: true
+          schema:
+            type: string
+            enum: [en, fr]
+            default: en
+          description: Language code for localized responses (default is en)
+      requestBody:
+        description: Promo Code details
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                promo_code:
+                  type: string
+                  example: "PROMO123"
+                discount_value:
+                  type: number
+                  example: 10
+                start_date:
+                  type: string
+                  example: "2021-01-01 00:00:00"
+                expiry_date:
+                  type: string
+                  example: "2021-12-31 23:59:59"
+                type:
+                  type: number
+                  enum: [1, 2]
+                  enumName: ["Fixed", "Percentage"]
+                  example: 2
+                status:
+                  type: number
+                  enum: [1, 2]
+                  enumName: ["Active", "Inactive"]
+                  example: 1
+      responses:
+        "200":
+          description: Promo code created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: number
+                    example: 1
+        "401":
+          description: Unauthorized - Invalid or missing token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Unauthorized
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Internal Server Error
+ 
+  /promo-code/status/{id}:
+    patch:
+        tags:
+          - Promo Code
+        summary: Update Promo Code Status
+        description: Update Promo Code Status.
+        parameters:
+          - name: Accept-Language
+            in: header
+            required: true
+            schema:
+              type: string
+              enum: [en, fr]
+              default: en
+            description: Language code for localized responses (default is en)
+          - name: id
+            in: path
+            required: true
+            schema:
+              type: number
+            description: Promo Code ID
+        responses:
+          "200":
+            description: Promo Code status updated successfully
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                      example: 1
+          "401":
+            description: Unauthorized - Invalid or missing token
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    error:
+                      type: string
+                      example: Unauthorized
+          "500":
+            description: Internal Server Error
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    error:
+                      type: string
+                      example: Internal Server Error

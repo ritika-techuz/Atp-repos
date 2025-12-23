@@ -1,0 +1,59 @@
+paths:
+  /state:
+    get:
+      tags:
+        - State
+      summary: Get a list of states
+      description: Returns a list of states, optionally filtered by country ID or searched by name/code.
+      security: []
+      parameters:
+        - name: Accept-Language
+          in: header
+          required: true
+          schema:
+            type: string
+            enum: [en, fr]
+            default: en
+          description: Language code for localized responses (default is en)
+        - name: country_id
+          in: query
+          required: true
+          schema:
+            type: number
+          description: Filter states by country ID
+          example: 101
+        - name: search
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Search term to filter states by name
+          example: "Uttar Pradesh"
+      responses:
+        '200':
+          description: A list of filtered states
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                      description: State ID
+                      example: 1
+                    name:
+                      type: string
+                      description: Full state name
+                      example: Uttar Pradesh
+        '500':
+          description: Internal server error fetching states
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Failed to fetch state list

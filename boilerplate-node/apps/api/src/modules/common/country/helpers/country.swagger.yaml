@@ -1,0 +1,102 @@
+paths:
+  /country/{country_id}:
+    get:
+      tags:
+        - Country
+      summary: Get a single country by ID
+      description: Returns details of a specific country by its ID.
+      security: []
+      parameters:
+        - name: Accept-Language
+          in: header
+          required: true
+          schema:
+            type: string
+            enum: [en, fr]
+            default: en
+          description: Language code for localized responses (default is en)
+        - name: country_id
+          in: path
+          required: true
+          schema:
+            type: number
+          description: ID of the country to retrieve
+          example: 101
+      responses:
+        '200':
+          description: A single country
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: number
+                    description: Country ID
+                    example: 101
+                  name:
+                    type: string
+                    description: Full country name
+                    example: India
+        '500':
+          description: Internal server error fetching country
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Failed to fetch country
+
+  /country:
+    get:
+      tags:
+        - Country
+      summary: Get a list of countries
+      description: Returns a list of available countries with optional search by name or code.
+      security: []
+      parameters:
+        - name: Accept-Language
+          in: header
+          required: true
+          schema:
+            type: string
+            enum: [en, fr]
+            default: en
+          description: Language code for localized responses (default is en)
+        - name: search
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Search term to filter countries by name or code
+          example: "United"
+      responses:
+        '200':
+          description: A list of countries
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                      description: Country ID
+                      example: 101
+                    name:
+                      type: string
+                      description: Full country name
+                      example: India
+        '500':
+          description: Internal server error fetching countries
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Failed to fetch country list

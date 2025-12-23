@@ -1,0 +1,53 @@
+paths:
+  /promo-code/validate/{id}:
+    get:
+      tags:
+        - Promo Code
+      summary: Validate Promo Code
+      description: Validate Promo Code.
+      parameters:
+        - name: Accept-Language
+          in: header
+          required: true
+          schema:
+            type: string
+            enum: [en, fr]
+            default: en
+          description: Language code for localized responses (default is en)
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: number
+          description: Promo Code ID to be validated
+      responses:
+        "200":
+          description: Promo Code validated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: number
+                    example: 1
+        "401":
+          description: Unauthorized - Invalid or missing token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Unauthorized
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Internal Server Error

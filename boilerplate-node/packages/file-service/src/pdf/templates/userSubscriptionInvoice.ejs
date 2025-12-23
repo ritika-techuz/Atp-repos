@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Invoice</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+      width: 100%;
+      padding: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+
+    th,
+    td {
+      padding: 8px;
+      border: 1px solid black;
+      vertical-align: top;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+    }
+
+    .header img {
+      max-width: 120px;
+      height: auto;
+    }
+
+    .invoice-title {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .billing-block td {
+      padding: 6px 8px;
+    }
+
+    .billing-block th {
+      text-align: left;
+      font-weight: bold;
+      padding-top: 10px;
+      padding-bottom: 5px;
+    }
+
+    .invoice-date th,
+    .invoice-items th {
+      background-color: #c3c7ed;
+      font-weight: 600;
+    }
+
+    .invoice-items td:nth-child(1) {
+      width: 10%;
+    }
+
+    .invoice-items td:nth-child(2) {
+      width: 40%;
+    }
+
+    .invoice-items td:nth-child(3),
+    .invoice-items td:nth-child(4),
+    .invoice-items td:nth-child(5) {
+      width: 16.66%;
+      text-align: center;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: auto;
+      padding: 20px 0;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container">
+    <div class="header">
+      <img src="<%= app_logo %>" alt="Logo" />
+      <div class="invoice-title">INVOICE</div>
+    </div>
+
+    <table class="billing-block" style="margin-bottom: 40px;">
+      <tr>
+        <th colspan="2" style="background: #f0f0f0;">Billed To:</th>
+      </tr>
+      <tr>
+        <td>Name:</td>
+        <td>
+          <%= name %>
+        </td>
+      </tr>
+      <tr>
+        <td>Contact Email:</td>
+        <td>
+          <%= email %>
+        </td>
+      </tr>
+      <tr>
+        <td>Address:</td>
+        <td>
+          <%= typeof address !=='undefined' ? address : '' %>
+        </td>
+      </tr>
+      <tr>
+        <td>City/ State/ Zip:</td>
+        <td>
+          <%= typeof city_state_zip !=='undefined' ? city_state_zip : '' %>
+        </td>
+      </tr>
+    </table>
+
+    <table class="invoice-date" style="margin-bottom: 40px;">
+      <tr>
+        <th style="width: 25%;">Invoice Date</th>
+        <th style="width: 30%;">Invoice #</th>
+        <th>Net Terms</th>
+      </tr>
+      <tr>
+        <td>
+          <%= start_date %>
+        </td>
+        <td style="text-align: center;">
+          <%= invoice_number %>
+        </td>
+        <td style="text-align: center;">Due upon receipt</td>
+      </tr>
+    </table>
+
+    <table class="invoice-items" style="margin-bottom: 60px;">
+      <tr>
+        <th>PO Line #</th>
+        <th>Description</th>
+        <th>Quantity</th>
+        <th>Unit Price</th>
+        <th>Line Total</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>
+          <%= interval %> subscription for <%= plan_type %> Plan
+        </td>
+        <td>1</td>
+        <td>
+          <%= price.toFixed(2) %>
+        </td>
+        <td>
+          <%= price.toFixed(2) %>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="3"></td>
+        <td><strong>SUB TOTAL</strong></td>
+        <td>
+          <%= sub_total.toFixed(2) %>
+        </td>
+      </tr>
+
+      <% if (typeof discount_amount !=='undefined' && discount_amount !==null && discount_amount !==0) { %>
+        <tr>
+          <td colspan="3"></td>
+          <td><strong>Discount</strong></td>
+          <td>
+            <%= discount_amount.toFixed(2) %>
+          </td>
+        </tr>
+        <% } %>
+
+          <% if (typeof tax_amount !=='undefined' && tax_amount !==null && tax_amount !==0) { %>
+            <tr>
+              <td colspan="3"></td>
+              <td><strong>Sales Tax</strong></td>
+              <td>
+                <%= tax_amount.toFixed(2) %>
+              </td>
+            </tr>
+            <% } %>
+
+              <tr>
+                <td colspan="3"></td>
+                <td><strong>TOTAL</strong></td>
+                <td>
+                  <%= grand_total.toFixed(2) %> (<%= currency %>)
+                </td>
+              </tr>
+    </table>
+  </main>
+
+  <footer>
+    Thank you for your purchase! <br />
+  </footer>
+</body>
+
+</html>

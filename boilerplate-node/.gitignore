@@ -1,0 +1,23 @@
+.DS_Store
+node_modules
+.turbo
+*.log
+.next
+dist
+dist-ssr
+*.local
+.env
+.cache
+server/dist
+public/dist
+pnpm-lock.yaml
+
+# Logger
+logs
+
+# Ignore the private and public keys
+packages/tokens/src/keys/private.key
+packages/tokens/src/keys/public.pub
+
+# Ignore the Graphs
+graphs
